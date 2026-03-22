@@ -1,1 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kenta City</title>
+    <meta
+      name="description"
+      content="An interactive city-style personal website by Kenta."
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">interactive bio site</p>
+          <h1>KENTA CITY</h1>
+        </div>
 
+        <button id="themeToggle" class="ghost-btn" type="button" aria-label="Toggle theme">
+          Night mode
+        </button>
+      </header>
+
+      <main class="app-main">
+        <section id="cityView" class="view active" aria-label="City map view">
+          <div class="city-frame">
+            <div class="city-backdrop"></div>
+            <div class="city-grid"></div>
+
+            <div class="road road-h road-h-1"></div>
+            <div class="road road-h road-h-2"></div>
+            <div class="road road-h road-h-3"></div>
+
+            <div class="road road-v road-v-1"></div>
+            <div class="road road-v road-v-2"></div>
+            <div class="road road-v road-v-3"></div>
+
+            <div class="street-label street-label-about">ABOUT AVENUE</div>
+            <div class="street-label street-label-social">SOCIAL STREET</div>
+            <div class="street-label street-label-project">PROJECT PLAZA</div>
+            <div class="street-label street-label-otaku">OTAKU LANE</div>
+            <div class="street-label street-label-secret">BACK ALLEY</div>
+
+            <div id="buildingsLayer" class="buildings-layer" aria-live="polite"></div>
+
+            <button
+              id="secretTrigger"
+              class="secret-trigger"
+              type="button"
+              aria-label="Enter the hidden back alley"
+              title="Maybe don't tap random dark corners. Or do."
+            >
+              ?
+            </button>
+
+            <div class="city-hud">
+              <div class="hud-card">
+                <span class="hud-title">Map</span>
+                <p>Tap buildings to enter</p>
+              </div>
+
+              <div class="hud-card">
+                <span class="hud-title">Districts</span>
+                <p>about · projects · socials · anime</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="interiorView"
+          class="view interior-view"
+          aria-label="Interior view"
+          aria-hidden="true"
+        >
+          <button id="backButton" class="back-btn" type="button">
+            ← Back to city
+          </button>
+
+          <div class="interior-shell">
+            <div class="interior-header">
+              <p id="interiorDistrict" class="eyebrow">district</p>
+              <h2 id="interiorTitle">Building</h2>
+              <p id="interiorDescription" class="interior-description">
+                Description goes here.
+              </p>
+            </div>
+
+            <div id="interiorRoom" class="interior-room">
+              <div class="room-decor decor-left"></div>
+              <div class="room-decor decor-right"></div>
+
+              <div id="interiorMiniCards" class="mini-card-grid"></div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+          </html>
