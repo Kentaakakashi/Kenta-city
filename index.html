@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>KENTA.CITY — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- LOADING SCREEN -->
+  <div id="loader">
+    <div class="loader-content">
+      <div class="loader-city-icon">🏙️</div>
+      <div class="loader-title">KENTA.CITY</div>
+      <div class="loader-sub">Loading the city...</div>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+    </div>
+  </div>
+
+  <!-- PARTICLE LAYER -->
+  <canvas id="particles"></canvas>
+
+  <!-- CITY VIEW -->
+  <div id="city-view">
+
+    <!-- Sky / Atmosphere -->
+    <div class="city-sky"></div>
+
+    <!-- Ambient Glow overlays -->
+    <div class="ambient-glow glow-blue"></div>
+    <div class="ambient-glow glow-pink"></div>
+    <div class="ambient-glow glow-orange"></div>
+
+    <!-- HUD Header -->
+    <header class="city-hud">
+      <div class="hud-logo">🏙 KENTA.CITY</div>
+      <div class="hud-time" id="hud-time">00:00</div>
+      <div class="hud-status">● ONLINE</div>
+    </header>
+
+    <!-- ISOMETRIC CITY SCENE -->
+    <div class="iso-scene" id="iso-scene">
+
+      <!-- ROAD GRID -->
+      <div class="road road-h road-main"></div>
+      <div class="road road-v road-main"></div>
+      <div class="road road-h road-sub1"></div>
+      <div class="road road-v road-sub2"></div>
+
+      <!-- Road markings -->
+      <div class="road-marking rm-1"></div>
+      <div class="road-marking rm-2"></div>
+      <div class="road-marking rm-3"></div>
+      <div class="crosswalk cw-1"></div>
+      <div class="crosswalk cw-2"></div>
+
+      <!-- ===== BUILDING: KENTA HOUSE (About Me) ===== -->
+      <div class="building building-house" id="b-about" data-zone="about" title="About Avenue">
+        <div class="b-shadow"></div>
+        <div class="b-ground"></div>
+        <div class="b-wall b-wall-front">
+          <div class="b-window win-warm"></div>
+          <div class="b-window win-warm"></div>
+          <div class="b-door"></div>
+        </div>
+        <div class="b-wall b-wall-side">
+          <div class="b-window win-warm small"></div>
+        </div>
+        <div class="b-roof"></div>
+        <div class="b-roof-peak"></div>
+        <div class="b-chimney"></div>
+        <div class="building-label">
+          <span class="label-jp">ケンタの家</span>
+          <span class="label-en">ABOUT AVENUE</span>
+        </div>
+        <div class="b-light-cone"></div>
+      </div>
+
+      <!-- ===== BUILDING: PROJECT TOWER ===== -->
+      <div class="building building-tower" id="b-projects" data-zone="projects" title="Project Plaza">
+        <div class="b-shadow"></div>
+        <div class="b-ground b-ground-office"></div>
+        <div class="b-wall b-wall-front office-front">
+          <div class="b-window win-blue"></div>
+          <div class="b-window win-blue"></div>
+          <div class="b-window win-blue"></div>
+          <div class="b-window win-blue"></div>
+          <div class="b-window win-blue"></div>
+          <div class="b-window win-blue"></div>
+          <div class="b-lobby"></div>
+        </div>
+        <div class="b-wall b-wall-side office-side">
+          <div class="b-window win-blue small"></div>
+          <div class="b-window win-blue small"></div>
+          <div class="b-window win-blue small"></div>
+        </div>
+        <div class="b-roof office-roof"></div>
+        <div class="b-antenna"></div>
+        <div class="b-antenna-light"></div>
+        <div class="building-label">
+          <span class="label-jp">プロジェクト</span>
+          <span class="label-en">MY PROJECTS</span>
+        </div>
+        <div class="b-light-cone blue-cone"></div>
+        <div class="neon-sign sign-office">DEV LAB</div>
+      </div>
+
+      <!-- ===== BUILDING: SOCIAL CAFE ===== -->
+      <div class="building building-cafe" id="b-social" data-zone="social" title="Social Street">
+        <div class="b-shadow"></div>
+        <div class="b-ground b-ground-cafe"></div>
+        <div class="b-wall b-wall-front cafe-front">
+          <div class="b-window win-warm"></div>
+          <div class="b-window win-warm"></div>
+          <div class="cafe-awning"></div>
+        </div>
+        <div class="b-wall b-wall-side cafe-side"></div>
+        <div class="b-roof cafe-roof"></div>
+        <div class="building-label">
+          <span class="label-jp">ソーシャルカフェ</span>
+          <span class="label-en">SOCIAL STREET</span>
+        </div>
+        <div class="neon-sign sign-cafe">OPEN 24H</div>
+        <div class="speech-bubble">💬</div>
+        <div class="b-light-cone pink-cone"></div>
+      </div>
+
+      <!-- ===== BUILDING: OTAKU ARCADE ===== -->
+      <div class="building building-arcade" id="b-otaku" data-zone="otaku" title="Otaku Lane">
+        <div class="b-shadow"></div>
+        <div class="b-ground b-ground-arcade"></div>
+        <div class="b-wall b-wall-front arcade-front">
+          <div class="b-window win-neon"></div>
+          <div class="b-window win-neon"></div>
+        </div>
+        <div class="b-wall b-wall-side arcade-side"></div>
+        <div class="b-roof arcade-roof"></div>
+        <div class="building-label">
+          <span class="label-jp">オタクレーン</span>
+          <span class="label-en">OTAKU LANE</span>
+        </div>
+        <div class="neon-sign sign-arcade">ANIME ARCADE</div>
+        <div class="b-light-cone purple-cone"></div>
+      </div>
+
+      <!-- ===== BUILDING: MUSIC SHOP ===== -->
+      <div class="building building-music" id="b-music" data-zone="music" title="Music Spot">
+        <div class="b-shadow"></div>
+        <div class="b-ground b-ground-music"></div>
+        <div class="b-wall b-wall-front music-front">
+          <div class="b-window win-warm"></div>
+          <div class="b-window win-warm"></div>
+          <div class="vinyl-record">🎵</div>
+        </div>
+        <div class="b-wall b-wall-side music-side"></div>
+        <div class="b-roof music-roof"></div>
+        <div class="building-label">
+          <span class="label-jp">音楽スポット</span>
+          <span class="label-en">MUSIC SPOT</span>
+        </div>
+        <div class="neon-sign sign-music">RECORDS</div>
+        <div class="b-light-cone orange-cone"></div>
+      </div>
+
+      <!-- ===== SECRET: BACK ALLEY ===== -->
+      <div class="building building-alley" id="b-secret" data-zone="secret" title="Back Alley">
+        <div class="b-shadow"></div>
+        <div class="b-ground b-ground-alley"></div>
+        <div class="b-wall b-wall-front alley-front">
+          <div class="b-window win-red"></div>
+        </div>
+        <div class="b-wall b-wall-side alley-side"></div>
+        <div class="b-roof alley-roof"></div>
+        <div class="building-label secret-label">
+          <span class="label-jp">???</span>
+          <span class="label-en">BACK ALLEY</span>
+        </div>
+        <div class="neon-sign sign-alley">??</div>
+      </div>
+
+      <!-- FOUNTAIN / PLAZA CENTER -->
+      <div class="plaza-center">
+        <div class="fountain">
+          <div class="fountain-base"></div>
+          <div class="fountain-water"></div>
+          <div class="fountain-spray"></div>
+        </div>
+        <div class="plaza-label">PROJECT PLAZA</div>
+      </div>
+
+      <!-- STREET TREES -->
+      <div class="street-tree tree-1"><div class="tree-top"></div><div class="tree-trunk"></div></div>
+      <div class="street-tree tree-2"><div class="tree-top"></div><div class="tree-trunk"></div></div>
+      <div class="street-tree tree-3"><div class="tree-top"></div><div class="tree-trunk"></div></div>
+      <div class="street-tree tree-4"><div class="tree-top"></div><div class="tree-trunk"></div></div>
+
+      <!-- STREET LAMPS -->
+      <div class="lamp lamp-1"><div class="lamp-post"></div><div class="lamp-head"></div><div class="lamp-glow"></div></div>
+      <div class="lamp lamp-2"><div class="lamp-post"></div><div class="lamp-head"></div><div class="lamp-glow"></div></div>
+      <div class="lamp lamp-3"><div class="lamp-post"></div><div class="lamp-head"></div><div class="lamp-glow"></div></div>
+      <div class="lamp lamp-4"><div class="lamp-post"></div><div class="lamp-head"></div><div class="lamp-glow"></div></div>
+
+      <!-- CARS (animated) -->
+      <div class="car car-1">🚗</div>
+      <div class="car car-2">🚙</div>
+      <div class="car car-3">🚕</div>
+
+      <!-- CITY MAP MINI (corner) -->
+      <div class="mini-map">
+        <div class="mm-label">CITY MAP</div>
+        <div class="mm-grid">
+          <div class="mm-block mm-house"></div>
+          <div class="mm-block mm-tower"></div>
+          <div class="mm-block mm-cafe"></div>
+          <div class="mm-block mm-arcade"></div>
+          <div class="mm-block mm-music"></div>
+          <div class="mm-dot you-are-here">★</div>
+        </div>
+      </div>
+
+    </div><!-- end iso-scene -->
+
+    <!-- Bottom HUD icons -->
+    <div class="bottom-hud">
+      <button class="hud-btn" id="btn-music-toggle" title="Toggle Vibe Music">🎵</button>
+      <button class="hud-btn" id="btn-map" title="City Map">🗺</button>
+      <button class="hud-btn" id="btn-info" title="Help">❓</button>
+    </div>
+
+    <!-- Tooltip -->
+    <div class="city-tooltip" id="city-tooltip"></div>
+
+  </div><!-- end city-view -->
+
+
+  <!-- ===== INTERIOR OVERLAY ===== -->
+  <div id="interior-view" class="hidden">
+    <div class="interior-bg" id="interior-bg"></div>
+    <div class="interior-container" id="interior-container">
+      <button class="back-btn" id="back-btn">← EXIT</button>
+      <div class="interior-content" id="interior-content"></div>
+    </div>
+    <div class="interior-particles" id="interior-particles"></div>
+  </div>
+
+
+  <!-- ===== ZONE DATA (hidden) — used by JS ===== -->
+  <script id="zone-data" type="application/json">
+  {
+    "about": {
+      "title": "KENTA'S ROOM",
+      "titleJp": "私について",
+      "theme": "home",
+      "desc": "A warm corner of the internet. This is where the human behind the code lives.",
+      "cards": [
+        { "icon": "👤", "title": "Who I Am", "body": "I'm Kenta — a self-taught developer, creative tinkerer, and night owl who builds things that feel alive. Based somewhere in the digital space between Tokyo and the internet." },
+        { "icon": "💻", "title": "What I Do", "body": "Front-end dev by day, side project hoarder by night. I love making web experiences that feel more like art than software." },
+        { "icon": "🌙", "title": "Vibe Check", "body": "Late-night coding sessions, lo-fi playlists, too much matcha, and an unhealthy obsession with isometric pixel art." },
+        { "icon": "📍", "title": "Currently", "body": "Deep in a new project that combines generative art with music visualization. Also on a mission to eat every ramen shop in existence." }
+      ]
+    },
+    "projects": {
+      "title": "PROJECT TOWER",
+      "titleJp": "プロジェクト",
+      "theme": "office",
+      "desc": "The place where ideas become real. Each floor is a different project. Take the elevator.",
+      "cards": [
+        { "icon": "🏙️", "title": "KENTA.CITY", "body": "This very site. An interactive isometric city portfolio built in pure HTML/CSS/JS. No frameworks. No excuses." },
+        { "icon": "🎨", "title": "ChromaFlow", "body": "A generative art tool that converts audio frequencies into real-time canvas visuals. Music you can see." },
+        { "icon": "🤖", "title": "NeuralChat", "body": "A lightweight AI chatbot wrapper with custom personality modes. Built for fun, used too seriously." },
+        { "icon": "📱", "title": "LoopDrop", "body": "A mobile drum sequencer PWA. 16-step beats in your browser. No install needed. Tap and create." },
+        { "icon": "🌐", "title": "More on GitHub", "body": "Check the archives for smaller experiments — CSS art, CLI tools, weird one-pagers. All open source." }
+      ]
+    },
+    "social": {
+      "title": "SOCIAL CAFÉ",
+      "titleJp": "つながろう",
+      "theme": "cafe",
+      "desc": "Pull up a chair. This is where connections happen. Order something warm and say hi.",
+      "cards": [
+        { "icon": "🐦", "title": "Twitter / X", "body": "@kenta_dev — mostly dev thoughts, late-night builds, and the occasional existential crisis about CSS." },
+        { "icon": "💼", "title": "LinkedIn", "body": "linkedin.com/in/kenta — professional facade maintained here. I do actually have skills, I promise." },
+        { "icon": "🐙", "title": "GitHub", "body": "github.com/kenta — where the real stuff lives. Stars appreciated, forks welcomed, roasts accepted." },
+        { "icon": "💬", "title": "Discord", "body": "kenta#0001 — hit me on Discord for collabs, project convos, or just to talk about anime." }
+      ]
+    },
+    "otaku": {
+      "title": "OTAKU ARCADE",
+      "titleJp": "オタクゾーン",
+      "theme": "arcade",
+      "desc": "Level up your knowledge of my interests. Anime, games, manga, and more. Quarters not required.",
+      "cards": [
+        { "icon": "⚔️", "title": "Anime Picks", "body": "Vinland Saga, Mushishi, Ping Pong the Animation, Mob Psycho 100. Prefer stuff that hits the soul over pure action." },
+        { "icon": "🎮", "title": "Games", "body": "Hollow Knight, Disco Elysium, Elden Ring, and anything FromSoftware. Also addicted to Balatro right now." },
+        { "icon": "📚", "title": "Manga", "body": "Berserk, Oyasumi Punpun, Dorohedoro, and JoJo's. My reading pile has its own gravitational field." },
+        { "icon": "🎲", "title": "Misc", "body": "Gunpla builds on weekends, Ghibli rewatch marathons, and a soft spot for old-school rhythm games." }
+      ]
+    },
+    "music": {
+      "title": "MUSIC SHOP",
+      "titleJp": "音楽の世界",
+      "theme": "music",
+      "desc": "The most important room. What you listen to says everything. Flip through the records.",
+      "cards": [
+        { "icon": "🎸", "title": "Artists", "body": "Nujabes, Tame Impala, FKJ, Porter Robinson, Chet Baker. The soundtrack to every late-night build session." },
+        { "icon": "🎹", "title": "Genres", "body": "Lo-fi hip hop, city pop, jazz fusion, ambient, and whatever Porter Robinson is calling his music these days." },
+        { "icon": "💿", "title": "Albums", "body": "Metaphorical Music by Nujabes. World's End Girlfriend's Virgin Babylon. Mac DeMarco's Salad Days. These live on rotation." },
+        { "icon": "🎧", "title": "Playlists", "body": "I maintain 3 playlists: 'Code Mode', 'Melancholy Hours', and 'city drive 2am'. All available on Spotify." }
+      ]
+    },
+    "secret": {
+      "title": "??? BACK ALLEY",
+      "titleJp": "秘密の場所",
+      "theme": "secret",
+      "desc": "You weren't supposed to find this. But since you're here... welcome to the other side.",
+      "cards": [
+        { "icon": "🔴", "title": "The Truth", "body": "This whole city? Built in 3 days fueled by instant noodles and spite. Every pixel placed manually. No AI. No generators." },
+        { "icon": "👾", "title": "Konami Code", "body": "↑↑↓↓←→←→BA — It does something. I won't say what. Try it on the city page." },
+        { "icon": "🌒", "title": "Favorite Quote", "body": "\"The city is not a concrete jungle, it is a human zoo.\" — Desmond Morris. Still thinking about this one." },
+        { "icon": "📡", "title": "Transmission", "body": "If you're reading this, you have good instincts. The really interesting projects are always in the back alleys." }
+      ]
+    }
+  }
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>
